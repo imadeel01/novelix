@@ -1,70 +1,93 @@
-# Getting Started with Create React App
+# 📖 Novelix — Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The React client for **Novelix**, a full-stack book library app. Handles browsing, cart management, authentication, and checkout — all wired to the [Novelix backend API](../backend).
+
+<details>
+<summary><strong>📑 Table of Contents</strong></summary>
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Folder Structure](#folder-structure)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Pages](#pages)
+- [Environment Notes](#environment-notes)
+
+</details>
+
+## Features
+
+- 📚 Book grid with real cover images (Open Library API)
+- 🔍 Individual book detail pages
+- 🛒 Cart with quantity tracking (Context API — no duplicate entries)
+- 🔐 Signup/Login (JWT stored in `localStorage`)
+- 🔒 Protected checkout route — redirects to `/login` if not authenticated
+- 📦 Delivery details form → order confirmation page
+- 🎨 Custom design system (Tailwind CSS, Fraunces + Inter fonts, lucide-react icons)
+
+## Tech Stack
+
+| Category      | Tools                          |
+|---------------|----------------------------------|
+| UI Library    | React                             |
+| Routing       | React Router                      |
+| Styling       | Tailwind CSS                      |
+| HTTP Client   | Axios                             |
+| Icons         | lucide-react                       |
+| State         | React Context API (cart state)      |
+
+## Folder Structure
+
+```
+frontend/
+├── public/
+├── src/
+│   ├── components/     # Navbar, BookCard, ProtectedRoute
+│   ├── context/        # CartContext (cart state + logic)
+│   ├── pages/           # Home, BookDetail, Cart, Checkout, Login, Signup, OrderSuccess
+│   ├── utils/            # getCover.js (Open Library cover lookup)
+│   ├── App.js             # Routes
+│   └── index.js
+├── tailwind.config.js
+└── package.json
+```
+
+## Getting Started
+
+> Requires the [backend](../backend) running on `http://localhost:5000` for API calls to work.
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Runs at **http://localhost:3000**.
 
 ## Available Scripts
 
-In the project directory, you can run:
+| Command         | What it does                          |
+|-----------------|------------------------------------------|
+| `npm start`     | Runs the app in development mode          |
+| `npm run build` | Builds a production-ready bundle to `/build` |
+| `npm test`      | Runs the test runner (CRA default)        |
 
-### `npm start`
+## Pages
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Route             | Page             | Notes                          |
+|-------------------|------------------|----------------------------------|
+| `/`                | Home             | All books grid                    |
+| `/book/:id`        | Book Detail      | Title + description               |
+| `/cart`            | Cart             | Add/remove, quantity display       |
+| `/checkout`        | Checkout         | 🔒 Protected — requires login       |
+| `/login`           | Login            |                                      |
+| `/signup`          | Signup           |                                      |
+| `/order-success`   | Order Success    | Shown after placing an order         |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Environment Notes
 
-### `npm test`
+- No `.env` file needed on the frontend — the backend URL (`http://localhost:5000`) is currently hardcoded in API calls.
+- Book cover images are fetched live from Open Library at render time, so image quality/availability varies per book.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+Part of the [Novelix](../../) project — see the [root README](../../README.md) for the full-stack overview.
